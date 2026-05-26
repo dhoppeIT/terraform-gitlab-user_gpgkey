@@ -1,6 +1,6 @@
 # terraform-gitlab-user_gpgkey
 
-Terraform module to manage the following Twingate resources:
+Terraform module to manage the following GitLab resources:
 
 * gitlab_user_gpgkey
 
@@ -12,7 +12,7 @@ specify the required variables and run the command `terraform init`.
 ```hcl
 module "gitlab_user" {
   source  = "gitlab.com/terraform-child-modules-48151/terraform-gitlab-user/local"
-  version = "1.2.0"
+  version = "2.0.0"
 
   name     = "John Doe"
   username = "jdoe"
@@ -22,7 +22,7 @@ module "gitlab_user" {
 
 module "gitlab_user_gpgkey" {
   source  = "gitlab.com/terraform-child-modules-48151/terraform-gitlab-user-gpgkey/local"
-  version = "1.0.0"
+  version = "2.0.0"
 
   key = file("${path.module}/public-key.asc")
 
@@ -34,15 +34,15 @@ module "gitlab_user_gpgkey" {
 ## Requirements
 
 | Name | Version |
-|------|---------|
+| ---- | ------- |
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0 |
-| <a name="requirement_gitlab"></a> [gitlab](#requirement\_gitlab) | ~> 18.0 |
+| <a name="requirement_gitlab"></a> [gitlab](#requirement\_gitlab) | ~> 19.0 |
 
 ## Providers
 
 | Name | Version |
-|------|---------|
-| <a name="provider_gitlab"></a> [gitlab](#provider\_gitlab) | ~> 18.0 |
+| ---- | ------- |
+| <a name="provider_gitlab"></a> [gitlab](#provider\_gitlab) | ~> 19.0 |
 
 ## Modules
 
@@ -51,20 +51,20 @@ No modules.
 ## Resources
 
 | Name | Type |
-|------|------|
+| ---- | ---- |
 | [gitlab_user_gpgkey.this](https://registry.terraform.io/providers/gitlabhq/gitlab/latest/docs/resources/user_gpgkey) | resource |
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:--------:|
+| ---- | ----------- | ---- | ------- | :------: |
 | <a name="input_key"></a> [key](#input\_key) | The armored GPG public key | `string` | n/a | yes |
-| <a name="input_user_id"></a> [user\_id](#input\_user\_id) | The ID of the user to add the GPG key to | `number` | `null` | no |
+| <a name="input_user_id"></a> [user\_id](#input\_user\_id) | The ID of the user to add the GPG key to. If this field is omitted, this resource manages a GPG key for the current user. Otherwise, this resource manages a GPG key for the specified user, and an admin token is required. | `number` | `null` | no |
 
 ## Outputs
 
 | Name | Description |
-|------|-------------|
+| ---- | ----------- |
 | <a name="output_created_at"></a> [created\_at](#output\_created\_at) | The time when this key was created in GitLab |
 | <a name="output_id"></a> [id](#output\_id) | The ID of this resource |
 | <a name="output_key_id"></a> [key\_id](#output\_key\_id) | The ID of the GPG key |
